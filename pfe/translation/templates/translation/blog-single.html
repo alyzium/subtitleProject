@@ -1,0 +1,380 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Rex : Upload Videos</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/icon" href="{% static 'translation/assets/images/favicon.ico' %}" />
+  <!-- Font Awesome -->
+  <link href="{% static 'translation/assets/css/font-awesome.css' %}" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="{% static 'translation/assets/css/bootstrap.css' %}" rel="stylesheet">
+  <!-- Slick slider -->
+  <link rel="stylesheet" type="text/css" href="{% static 'translation/assets/css/slick.css' %}" />
+  <!-- Fancybox slider -->
+  <link rel="stylesheet" href="{% static 'translation/assets/css/jquery.fancybox.css' %}" type="text/css"
+    media="screen" />
+  <!-- Animate css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'translation/assets/css/animate.css' %}" />
+  <!-- Theme color -->
+  <link id="switcher" href="{% static 'translation/assets/css/theme-color/default.css' %}" rel="stylesheet">
+
+  <!-- Main Style -->
+  <link href="{% static 'translation/style.css' %}" rel="stylesheet">
+
+  <!-- Fonts -->
+  <!-- Open Sans for body font -->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <!-- Raleway for Title -->
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <!-- Pacifico for 404 page   -->
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <!-- BEGAIN PRELOADER -->
+  <div id="preloader">
+    <div class="loader">&nbsp;</div>
+  </div>
+  <!-- END PRELOADER -->
+
+  <!-- SCROLL TOP BUTTON -->
+  <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+  <!-- END SCROLL TOP BUTTON -->
+
+  <!-- Start menu section -->
+  <section id="menu-area">
+    <nav class="navbar navbar-default main-navbar" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- LOGO -->
+          <a class="navbar-brand logo" href="{% url 'translation:index' %}"><img
+              src="{% static 'translation/assets/images/logo.jpg' %}" alt="logo"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul id="top-menu" class="nav navbar-nav main-nav menu-scroll">
+            <li><a href="">Home</a></li>
+            <li class="active"><a href="">Upload </a></li>
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+        <div class="search-area">
+          <form action="">
+            <input id="search" name="search" type="text" placeholder="What're you looking for ?">
+            <input id="search_submit" value="Rechercher" type="submit">
+          </form>
+        </div>
+      </div>
+    </nav>
+  </section>
+  <!-- End menu section -->
+  <!-- Start blog banner section -->
+  <section id="blog-banner">
+    <img src="{% static 'translation/assets/images/blog-banner.jpg' %}" alt="img">
+    <div class="blog-overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="blog-banner-area">
+              <h2>Let's upload your video</h2>
+              <ol class="breadcrumb">
+                <li><a href="{% url 'translation:index' %}">Home</a></li>
+                <li class="active">Upload videos</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End blog banner section -->
+
+  <!-- Start blog section -->
+  <section id="blog">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="blog-area">
+            <div class="row">
+              <div class="col-lg-8 col-md-7 col-sm-12">
+                <div class="blog-left blog-details">
+                  <!-- Start single blog post -->
+                  <article class="single-from-blog">
+
+                    <div class="single-widget">
+                      <h2>Put the link of the video below</h2>
+
+                      <form method="POST" action="" id="post-form" enctype="multipart/form-data" class="blog-search">
+                        <input name="link" type="text" id="youTubeUrl"><br><br>
+                        <iframe hidden id="videoObject" type="text/html" width="500" height="265" frameborder="0"
+                          allowfullscreen></iframe>
+
+                        <video hidden controls="" autoplay="" id="media" hidden controls width="450" height="300">
+                          <source src="">
+                        </video><br>
+
+                        <p id="empty" class="label label-warning" style="display:none">Url should not be empty</p>
+                        <p id="video_error" class="label label-warning" style="display:none">This url cannot be played
+                        </p>
+
+                        <div>
+                          <button type="button" class="button button-default col-sm-4" data-text="Search" name="Search"
+                            id="btnSearch" onclick="validateYouTubeUrl();"><span>Search </span></button>
+                        </div>
+                    </div>
+
+                    <div class="single-widget">
+                      <h2>Select a video from your computer</h2><br>
+
+                      <input type="file" name="myVideo" onchange="selectedVideo(this);"
+                        accept=".mp4,.mkv,.webm,.oggn,.ogv,.3gp">
+                      <video hidden aria-placeholder="Preview" id="video" controls width="450" height="300">
+                        <source id="source">
+                      </video><br>
+
+
+                    </div>
+                    <div>
+
+                      <center>
+                        <p id="two" class="label label-warning" style="display:none">You cannot download and upload at
+                          the same time</p>
+
+                        <p id="download_error" class="label label-info " style="display:none">Sorry, we couldn't
+                          download this url</p>
+
+                        <p id="Down" class="label label-info " style="display:none">Downloading, please wait ...</p>
+                        <p id="myElem" class="label label-success" style="display:none">Video Downloaded , Click on next
+                          for the next step</p>
+                      </center>
+                    </div>
+                    <button class="button button-default col-md-7" data-text="Download" type="submit" id="upload-btn"
+                      name="Download"><span>Download</span></button>
+
+
+                    </form>
+                    <div id="next_but" hidden>
+                      <button class="button button-default col-sm-4" data-toggle="modal" data-target="#next"
+                        data-text="Next >>" name="Next"><span>Next </span></button>
+                    </div>
+                  </article>
+
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="next" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3>Important</h3>
+                        </div>
+                        <div class="modal-body">
+                          Pour sous-titrer votre vidéo, il vous faut un script de sous-titrage
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary"><a style="color:grey; text-decoration:none"
+                              href="{%url 'translation:generate-script' %}">Importer un fichier SRT</a></button>
+                          <button type="button" style="background-color:#00d999; border: none; "
+                            class="btn btn-primary"><a style="color: white; text-decoration:none"
+                              href="{%url 'translation:creat-script' %}">Créer un ficher SRT</a></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End single blog post -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End blog section -->
+
+  <!-- Start Footer -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="footer-top-area">
+              <a class="footer-logo" href="#"><img src="{% static 'translation/assets/images/logo.jpg' %}"
+                  alt="Logo"></a>
+              <div class="footer-social">
+                <a class="facebook" href="#"><span class="fa fa-facebook"></span></a>
+                <a class="twitter" href="#"><span class="fa fa-twitter"></span></a>
+                <a class="google-plus" href="#"><span class="fa fa-google-plus"></span></a>
+                <a class="youtube" href="#"><span class="fa fa-youtube"></span></a>
+                <a class="linkedin" href="#"><span class="fa fa-linkedin"></span></a>
+                <a class="dribbble" href="#"><span class="fa fa-dribbble"></span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+  <!-- End Footer -->
+  <!-- jQuery library -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- Bootstrap -->
+
+  <script src="{% static 'translation/assets/js/bootstrap.js' %}"></script>
+  <!-- Slick Slider -->
+  <script type="text/javascript" src="{% static 'translation/assets/js/slick.js' %}"></script>
+  <!-- Counter -->
+  <script type="text/javascript" src="{% static 'translation/assets/js/waypoints.js' %}"></script>
+  <script type="text/javascript" src="{% static 'translation/assets/js/jquery.counterup.js' %}"></script>
+  <!-- mixit slider -->
+  <script type="text/javascript" src="{% static 'translation/assets/js/jquery.mixitup.js' %}"></script>
+  <!-- Add fancyBox -->
+  <script type="text/javascript" src="{% static 'translation/assets/js/jquery.fancybox.pack.js' %}"></script>
+  <!-- Wow animation -->
+
+  <script type="text/javascript" src="{% static 'translation/assets/js/wow.js' %}"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <!-- Custom js -->
+  <script type="text/javascript" src="{% static 'translation/assets/js/custom.js' %}"></script>
+
+
+  <script>
+    function selectedVideo(self) {
+      video.hidden = false;
+      var file = self.files[0];
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var src = e.target.result;
+        var video = document.getElementById("video");
+        var source = document.getElementById("source");
+        source.setAttribute("src", src);
+        video.load();
+        video.autoplay = false;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function validateYouTubeUrl() {
+      $("#video_error").hide();
+      $("#two").hide();
+      $("#download_error").hide();
+      $("#myElem").hide();
+      $("#Down").hide();
+      $("#next_but").hide();
+      var elem = document.getElementById("myElem");
+      var video = document.getElementById("media");
+      var source = document.getElementById("video_link");
+      document.getElementById('empty').style.visibility = 'hidden';
+
+      var url = $('#youTubeUrl').val();
+      if (url != undefined || url != '') {
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+        var match = url.match(regExp);
+        if (match && match[2].length == 11) {
+          videoObject.hidden = false;
+          video.hidden = true;
+          video.src = video.src;
+          $('#videoObject').attr('src', 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0&enablejsapi=1');
+        } else {
+          video.hidden = false;
+          videoObject.src = videoObject.src;
+          videoObject.hidden = true;
+          video.src = url;
+          video.autoplay = false;
+          video.addEventListener("error", function (e) {
+            $("#video_error").show();
+          });
+        }
+      }
+    }
+  </script>
+  <script>
+    $(function () {
+      $("#post-form").submit(function () {
+        var data = new FormData($('#post-form').get(0));
+
+        $("#Down").show();
+        $("#myElem").hide();
+        $("#empty").hide();
+        $("#download_error").hide();
+        $("#two").hide();
+        $.ajax({
+          type: "POST",
+          url: "{% url 'translation:startnow' %}",
+          data: data,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function (json) {
+            if (json.message == 'ok') {
+              $("#myElem").show();
+              $("#empty").hide();
+              $("#Down").hide();
+              $("#next_but").show();
+              $("#download_error").hide();
+            } else if (json.message == "empty") {
+              //console.log('Something wrong with response');
+              $("#empty").show();
+              $("#myElem").hide();
+              $("#Down").hide();
+              $("#download_error").hide();
+            } else if (json.message == "not valid") {
+              $("#download_error").show();
+              $("#myElem").hide();
+              $("#Down").hide();
+            } else if (json.message == "url and files") {
+              $("#two").show();
+              $("#download_error").hide();
+              $("#myElem").hide();
+              $("#Down").hide();
+            }
+
+          },
+          failure: function () {
+            $(this).addClass("error");
+          }
+        });
+        return false;
+      });
+    });
+  </script>
+  <script>
+    var pattern = /^(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])+(.[a-z])?/;
+    var regex = new RegExp(pattern);
+    $("#btnSearch").hide();
+    $("#youTubeUrl").keyup(function () {
+      if ($(this).val().match(regex)) {
+        $("#btnSearch").show();
+        $("#empty").hide();
+      } else {
+        $("#btnSearch").hide();
+      }
+    });
+  </script>
+</body>
+
+</html>
